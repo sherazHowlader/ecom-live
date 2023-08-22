@@ -1,0 +1,18 @@
+name: Deploy vuejs ecommerce project
+on:
+  push:
+    branches:
+      - master
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the latest code
+        uses: actions/checkout@v2.3.2
+      - uses: actions/setup-node@master      
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.ftp_server }}
+          username: ${{ secrets.ftp_username }}
+          password: ${{ secrets.ftp_password }}
